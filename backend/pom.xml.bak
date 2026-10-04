@@ -32,10 +32,7 @@
     </scm>
     <properties>
         <java.version>17</java.version>
-        <sonar.host.url>http://192.168.33.10:9000</sonar.host.url>
-    <sonar.projectKey>gestion-projets</sonar.projectKey>
-    <sonar.projectName>Gestion Projets</sonar.projectName>
-  </properties>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,22 +115,7 @@
                     </execution>
                 </executions>
             </plugin>
-              <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.13</version>
-        <executions>
-          <execution>
-            <goals><goal>prepare-agent</goal></goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>verify</phase>
-            <goals><goal>report</goal></goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
+        </plugins>
     </build>
 
 </project>

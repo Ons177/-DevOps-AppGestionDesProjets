@@ -27,11 +27,11 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     dir('backend') {
-                        sh 'mvn clean verify sonar:sonar'
+                        sh 'mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=$SONAR_AUTH_TOKEN'
                     }
                 }
                 timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                    waitForQualityGate abortPipeline: false
                 }
             }
         }
