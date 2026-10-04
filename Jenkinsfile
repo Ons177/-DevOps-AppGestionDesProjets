@@ -23,7 +23,6 @@ pipeline {
         }
 
         stage('3 - SonarQube') {
-            when { expression { params.RUN_SONAR } }
             steps {
                 withSonarQubeEnv('SonarQube') {
                     dir('backend') {
@@ -59,7 +58,6 @@ pipeline {
         }
 
         stage('6 - Maven Deploy') {
-            when { expression { params.RUN_DEPLOY } }
             steps {
                 dir('backend') {
                     sh 'mvn deploy -DskipTests'
@@ -68,7 +66,6 @@ pipeline {
         }
 
         stage('7 - Docker Image and Push') {
-            when { expression { params.RUN_DOCKER_PUSH } }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                     sh 'docker build -t $DH_USER/projets-backend:$BUILD_NUMBER -t $DH_USER/projets-backend:latest ./backend'
