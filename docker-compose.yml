@@ -2,7 +2,8 @@ name: projets
 
 services:
   mysql:
-    image: mysql:8.0
+    build: ./mysql
+    image: noussa177/projets-mysql:latest
     container_name: projets-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root

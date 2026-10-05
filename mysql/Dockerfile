@@ -1,0 +1,4 @@
+FROM mysql:8.0
+ENV MYSQL_DATABASE=test_db
+ENV TZ=Africa/Tunis
+EXPOSE 3306

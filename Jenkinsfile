@@ -70,11 +70,14 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                     sh 'docker build -t $DH_USER/projets-backend:$BUILD_NUMBER -t $DH_USER/projets-backend:latest ./backend'
                     sh 'docker build -t $DH_USER/projets-frontend:$BUILD_NUMBER -t $DH_USER/projets-frontend:latest ./frontend'
+                    sh 'docker build -t $DH_USER/projets-mysql:$BUILD_NUMBER -t $DH_USER/projets-mysql:latest ./mysql'
                     sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
                     sh 'docker push $DH_USER/projets-backend:$BUILD_NUMBER'
                     sh 'docker push $DH_USER/projets-backend:latest'
                     sh 'docker push $DH_USER/projets-frontend:$BUILD_NUMBER'
                     sh 'docker push $DH_USER/projets-frontend:latest'
+                    sh 'docker push $DH_USER/projets-mysql:$BUILD_NUMBER'
+                    sh 'docker push $DH_USER/projets-mysql:latest'
                 }
             }
         }
