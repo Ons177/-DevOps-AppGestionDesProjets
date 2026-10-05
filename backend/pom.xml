@@ -33,9 +33,9 @@
     <properties>
         <java.version>17</java.version>
         <sonar.host.url>http://192.168.33.10:9000</sonar.host.url>
-    <sonar.projectKey>gestion-projets</sonar.projectKey>
-    <sonar.projectName>Gestion Projets</sonar.projectName>
-  </properties>
+        <sonar.projectKey>gestion-projets</sonar.projectKey>
+        <sonar.projectName>Gestion Projets</sonar.projectName>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,32 +118,37 @@
                     </execution>
                 </executions>
             </plugin>
-              <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.13</version>
-        <executions>
-          <execution>
-            <goals><goal>prepare-agent</goal></goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>verify</phase>
-            <goals><goal>report</goal></goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.13</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
-  <distributionManagement>
-    <repository>
-      <id>nexus-releases</id>
-      <url>http://192.168.33.10:8081/repository/maven-releases/</url>
-    </repository>
-    <snapshotRepository>
-      <id>nexus-snapshots</id>
-      <url>http://192.168.33.10:8081/repository/maven-snapshots/</url>
-    </snapshotRepository>
-  </distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://192.168.33.10:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://192.168.33.10:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
