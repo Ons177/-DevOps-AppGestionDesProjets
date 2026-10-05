@@ -69,6 +69,7 @@ pipeline {
 
         stage('7 - Docker Image and Push') {
             steps {
+<<<<<<< HEAD
                 withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDS}",
                                                   usernameVariable: 'DH_USER',
                                                   passwordVariable: 'DH_PASS')]) {
@@ -87,6 +88,19 @@ pipeline {
                         docker push $DOCKERHUB_USER/projets-mysql:$IMAGE_TAG
                         docker push $DOCKERHUB_USER/projets-mysql:latest
                     '''
+=======
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
+                    sh 'docker build -t $DH_USER/projets-backend:$BUILD_NUMBER -t $DH_USER/projets-backend:latest ./backend'
+                    sh 'docker build -t $DH_USER/projets-frontend:$BUILD_NUMBER -t $DH_USER/projets-frontend:latest ./frontend'
+                    sh 'docker build -t $DH_USER/projets-mysql:$BUILD_NUMBER -t $DH_USER/projets-mysql:latest ./mysql'
+                    retry(3) { sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin' }
+                    retry(3) { sh 'docker push $DH_USER/projets-backend:$BUILD_NUMBER' }
+                    retry(3) { sh 'docker push $DH_USER/projets-backend:latest' }
+                    retry(3) { sh 'docker push $DH_USER/projets-frontend:$BUILD_NUMBER' }
+                    retry(3) { sh 'docker push $DH_USER/projets-frontend:latest' }
+                    retry(3) { sh 'docker push $DH_USER/projets-mysql:$BUILD_NUMBER' }
+                    retry(3) { sh 'docker push $DH_USER/projets-mysql:latest' }
+>>>>>>> d67ee15 (Retry sur login et push Docker Hub)
                 }
             }
         }
