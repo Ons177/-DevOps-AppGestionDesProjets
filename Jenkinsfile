@@ -44,7 +44,7 @@ pipeline {
             steps {
                 dir('backend') {
                     withCredentials([string(credentialsId: "${SONAR_CREDS}", variable: 'SONAR_TOKEN')]) {
-                        sh 'mvn -B sonar:sonar -Dsonar.token=$SONAR_TOKEN'
+                        sh 'mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:5.0.0.4389:sonar -Dsonar.token=$SONAR_TOKEN -Dsonar.host.url=http://localhost:9000'
                     }
                 }
             }
